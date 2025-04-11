@@ -20,8 +20,8 @@ This project is divided into two main parts:
 
 ## 🚀 Live Demo
 
-- **Frontend (Vercel)**: [https://your-frontend.vercel.app](https://your-frontend.vercel.app)
-- **Backend (Render)**: [https://your-backend.onrender.com](https://your-backend.onrender.com)
+- **Frontend (Vercel)**: [https://student-job-tracker-drab.vercel.app](https://student-job-tracker-drab.vercel.app/)
+- **Backend (Render)**: [https://studentjobtracker-yhh9.onrender.com](https://studentjobtracker-yhh9.onrender.com)
 
 ---
 
