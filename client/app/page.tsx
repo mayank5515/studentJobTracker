@@ -35,8 +35,8 @@ export default function JobTracker() {
   const [filters, setFilters] = useState({
     status: [] as JobStatus[],
     dateRange: {
-      from: undefined,
-      to: undefined,
+      from: undefined as Date | undefined,
+      to: undefined as Date | undefined,
     },
     search: "",
   })
@@ -49,7 +49,7 @@ export default function JobTracker() {
 
   const fetchJobs = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/v1/jobs');
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/jobs`);
       const { data } = response.data;
       console.log('data', data);
       const jobsWithDate = data.map((job: any) => ({
@@ -105,7 +105,7 @@ export default function JobTracker() {
       // id: Math.random().toString(36).substring(2, 9), // Generate a random ID
     }
     console.log('newJob', newJob);
-    axios.post('http://localhost:8000/api/v1/jobs', newJob).then((response) => {
+    axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/jobs`, newJob).then((response) => {
       console.log('Job added successfully:', response.data);
       fetchJobs();// so that jobs are showcased in sorted order
       // setJobs((prevJobs) => [{ ...newJob, id: response.data.id }, ...prevJobs]);
@@ -121,7 +121,7 @@ export default function JobTracker() {
     setJobs(jobs.map((job) => (job.id === updatedJob.id ? updatedJob : job)))
     //also update the selected job in backend
     console.log('updated Jobs: ', updatedJob);
-    axios.patch(`http://localhost:8000/api/v1/jobs/${updatedJob.id}`, updatedJob)
+    axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/jobs/${updatedJob.id}`, updatedJob)
       .then(response => {
         console.log('Job updated successfully:', response.data);
       })
@@ -137,7 +137,7 @@ export default function JobTracker() {
     if (selectedJob) {
       // Delete the job from the backend
       // console.log('selected job for deleting from deleteJob fn: ', selectedJob);
-      axios.delete(`http://localhost:8000/api/v1/jobs/${selectedJob._id}`).then((response) => {
+      axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/jobs/${selectedJob.id}`).then((response) => {
         console.log('Job deleted successfully:', response);
         fetchJobs();
       }).catch((error) => {
