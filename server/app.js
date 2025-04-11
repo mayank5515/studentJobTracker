@@ -5,7 +5,8 @@ const jobRouter = require('./routes/job.route');
 const app = express();
 app.use(express.json());
 corsOptions = {
-    origin: 'http://localhost:3000',
+    // origin: 'http://localhost:3000',
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
